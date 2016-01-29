@@ -4,9 +4,11 @@ if (Meteor.isClient) {
 
     Template.addEmail.helpers(
         {
+            //keep track of if the user has sent the form
+            //(so we know when we can hide it)
             sent: function ()
             {
-                return Session.get('sent'); //since we're using session sent here this value will automatically update
+                return Session.get('sent');
             }
         }
     );
@@ -14,7 +16,7 @@ if (Meteor.isClient) {
 
     Template.addEmail.events(
     {
-        //this will be called when you submit the form with the class 'add-email'
+        //this will be called when you submit form with class 'add-email'
         "submit .add-email": function (event)
         {
             // Prevent default browser form submit. Without this it will refresh the page!!!
@@ -22,8 +24,8 @@ if (Meteor.isClient) {
 
             // Insert a task into the collection
             Emails.insert({
-                email: event.target.email.value, //event.target will be the form, when the form is submitted it'll have a property for each field (based on the 'name' attribute)
-                name: event.target.name.value
+                email: event.target.email.value, //event.target will be the form. It'll have a property for each field (based on the field's 'name' attribute)
+                name: event.target.name.value //you can use chrome dev tools to inspect the event object if you like
             });
 
             Session.set('sent', true);
@@ -54,7 +56,7 @@ if (Meteor.isServer)
         //cycle through all emails
         _.each(allEmails, function (item)
         {
-            console.log(item.email); //this will log to the same terminal you did "meteor" (to run the application)
+            console.log(item.email); //this will log to the terminal where you did "meteor" (to run the application)
         });
 
     });
