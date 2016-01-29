@@ -1,4 +1,6 @@
 //this is like creating an array of email objects (but with lots of added stuff!!)
+//it we be saved to the server so that it's shared between mutliple users (everyone sees the same content)
+//and it will also be accessible on the client side (yes, sometimes you'll have stuff that's only on the server or client) 
 Emails = new Mongo.Collection("emails");
 
 //this code is performed inside the browser itself (the client side)
@@ -27,11 +29,13 @@ if (Meteor.isClient) {
             event.preventDefault();
 
             // Insert a task into the collection
+            // when we did this it will automaticaly call back to the server to save this too
             Emails.insert({
                 email: event.target.email.value, //event.target will be the form. It'll have a property for each field (based on the field's 'name' attribute)
                 name: event.target.name.value //you can use chrome dev tools to inspect the event object if you like
             });
 
+            //we want to remember that the form was sent so we know to hide the form
             Session.set('sent', true);
 
         }
