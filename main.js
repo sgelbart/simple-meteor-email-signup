@@ -1,12 +1,20 @@
-//this is like creating an array of email objects (but with lots of added stuff!!)
-//it we be saved to the server so that it's shared between mutliple users (everyone sees the same content)
+
+//CREATE A COLLECTION TO HOLD EMAILS AND NAMES
+//this is like creating an array of email/name objects (but with lots of added functionality!!)
+//it we be saved to the server so that it's shared between mutliple users (so everyone sees the same list)
 //and it will also be accessible on the client side (yes, sometimes you'll have stuff that's only on the server or client) 
 Emails = new Mongo.Collection("emails");
 
-//this code is performed inside the browser itself (the client side)
+//this code is only performed inside the browser itself (the client side)
 if (Meteor.isClient) {
 
+    //TEMPLATE INTRO
+    //here we'll say what goes into our templates and how our templates will respond to actions
+    //templates are peices of html that include variables, if statements, and loops
+    //you can have mutliple templates with different names to keep them organized
+    
     //helpers say WHAT variables get passed to the template
+    //here we're defining helpers for our ADDEMAIL template
     Template.addEmail.helpers(
         {
             //keep track of if the user has sent the form
@@ -41,6 +49,9 @@ if (Meteor.isClient) {
         }
     });
 
+    //say what variables will get passed to the 
+    //wondering why we don't define what "emails" are once and use it throughout our code?
+    //it's beacuse when you have a large application, you could have lots of different lists of emails used in different places, which would make things confusing
     Template.emailList.helpers(
         {
             emails: function()
@@ -51,13 +62,13 @@ if (Meteor.isClient) {
     );
 }
 
-//this code is performed before behind the scenes before we send any data to the browser
+//this code is performed behind the scenes before we send any data to the browser
 //code we want to be secure or to happen for multiple users should go here.
 if (Meteor.isServer)
 {
+    //this code only runs when meteor is first starting 
     Meteor.startup(function ()
     {
-
         //often times you'll want to do things here
         //for now let's just log all the emails to console
 
@@ -66,6 +77,7 @@ if (Meteor.isServer)
         //cycle through all emails
         _.each(allEmails, function (item)
         {
+            //it's useful to know how to do this for debugging!
             console.log(item.email); //this will log to the terminal where you did "meteor" (to run the application)
         });
 
