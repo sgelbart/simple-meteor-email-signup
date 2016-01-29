@@ -1,7 +1,9 @@
 Emails = new Mongo.Collection("emails");
 
+//this code is performed inside the browser itself (the client side)
 if (Meteor.isClient) {
 
+    //helpers say WHAT variables get passed to the template
     Template.addEmail.helpers(
         {
             //keep track of if the user has sent the form
@@ -13,10 +15,11 @@ if (Meteor.isClient) {
         }
     );
 
-
+    //events say WHEN to take certain actions based on how the user interacts with the template
     Template.addEmail.events(
     {
         //this will be called when you submit form with class 'add-email'
+        //"submit" either happens when you click the send button on a form or whne you press enter
         "submit .add-email": function (event)
         {
             // Prevent default browser form submit. Without this it will refresh the page!!!
@@ -43,6 +46,8 @@ if (Meteor.isClient) {
     );
 }
 
+//this code is performed before behind the scenes before we send any data to the browser
+//code we want to be secure or to happen for multiple users should go here.
 if (Meteor.isServer)
 {
     Meteor.startup(function ()
