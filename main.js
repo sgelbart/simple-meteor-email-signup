@@ -1,6 +1,8 @@
 
 //CREATE A COLLECTION TO HOLD EMAILS AND NAMES
-//this is like creating an array of email/name objects (but with lots of added functionality!!)
+//this is like creating an array of email/name objects (but with LOTS of added functionality!!)
+//think of it like:
+//[{name:'Sabrina',email:'sabrina@domain.com'},{name:'Brit',email:'brit@domain.com'}]
 //it we be saved to the server so that it's shared between mutliple users (so everyone sees the same list)
 //and it will also be accessible on the client side (yes, sometimes you'll have stuff that's only on the server or client) 
 Emails = new Mongo.Collection("emails");
