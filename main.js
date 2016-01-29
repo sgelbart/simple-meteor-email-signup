@@ -5,16 +5,13 @@ if (Meteor.isClient) {
     Session.setDefault('sent', false); //note: this isn't needed here but good for reference
 
     Template.addEmail.helpers(
-    {
-        sent: function ()
         {
-            return Session.get('sent'); //since we're using session sent here this value will automatically update
-        },
-        emails: function()
-        {
-            return Emails.find(); //question: why can we use find() here without fetch?? probably because it's client? or maybe because the template automatically pulls it as well?
+            sent: function ()
+            {
+                return Session.get('sent'); //since we're using session sent here this value will automatically update
+            }
         }
-    });
+    );
 
 
     Template.addEmail.events(
@@ -43,6 +40,15 @@ if (Meteor.isClient) {
 
         }
     });
+
+    Template.emailList.helpers(
+        {
+            emails: function()
+            {
+                return Emails.find(); //question: why can we use find() here without fetch?? probably because it's client? or maybe because the template automatically pulls it as well?
+            }
+        }
+    );
 }
 
 if (Meteor.isServer)
@@ -50,13 +56,14 @@ if (Meteor.isServer)
     Meteor.startup(function ()
     {
 
-        ///////////////////////////////////////////////////////////////
-        //REMOTES DUPLICATES
-        //------------------------------------------------------------
-        //Can take off if you'd like (doesn't hurt anything though!)
-        //Note: a better way to do this would be to prevent the user from submitting form if it's a duplicate
-        //a good tool would be aldeed-simpleschema or autoform
-        ///////////////////////////////////////////////////////////////
+        /**
+         * REMOTES DUPLICATES
+         * Can take off if you'd like (doesn't hurt anything though!)
+         * Note: a better way to do this would be to prevent the user from submitting form if it's a duplicate
+         * a good tool would be aldeed-simpleschema or autoform
+         *
+         * @type {Array}
+         */
 
         var exists = []; //keep track of which emails we've already found
 

@@ -1,19 +1,19 @@
 <head>
-  <title>Girls Who Code Tulsa</title>
+  <title>Signup!</title>
 </head>
 
 <body>
 	<div class="container">
         <div class="jumbotron">
-            <h1>Girls Who Code Tulsa</h1>
-
-			<h2>Course Materials</h2>
-            <a href="https://docs.google.com/document/d/1jhLgXgE-9xIg-K1uH1-kHRg9cWO_FeLzm0o_qB-UQQM/edit?usp=sharing">Class Notes On Google Docs</a>
-			<br/>
-			<a href="https://gwctulsa.slack.com/">Ask Questions on our Slack Channel</a>
-
-			<h2>ROSTER SIGNUP!!</h2>
-			{{> addEmail}}
+            <h1>Add your email if you're awesome!</h1>
+			<div class="row">
+				<div class="col-sm-6">
+					{{> addEmail}}
+				</div>
+				<div class="col-sm-6">
+					{{> emailList}}
+				</div>
+			</div>
         </div>
 	</div>
 </body>
@@ -28,14 +28,18 @@
 			<button class="btn btn-primary" type="submit" style="margin-top:10px;">Submit</button>
 		</form>
 	{{/if}}
-	<h3>Emails Added:</h3>
-	<ol>
+</template>
+
+<template name="emailList">
+    <h3 style="margin-top:0;">Who has already signed up?</h3>
+    <ol>
 		{{#each emails}}
 			{{> email}}
 		{{/each}}
-	</ol>
+    </ol>
 </template>
 
+
 <template name="email">
-	<li>{{name}}: {{email}}</li>
+	<li><strong>{{name}}</strong>: {{email}}</li>
 </template>
