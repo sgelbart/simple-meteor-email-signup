@@ -2,8 +2,6 @@ Emails = new Mongo.Collection("emails");
 
 if (Meteor.isClient) {
 
-    Session.setDefault('sent', false); //note: this isn't needed here but good for reference
-
     Template.addEmail.helpers(
         {
             sent: function ()
@@ -19,22 +17,14 @@ if (Meteor.isClient) {
         //this will be called when you submit the form with the class 'add-email'
         "submit .add-email": function (event)
         {
-            // Prevent default browser form submit
+            // Prevent default browser form submit. Without this it will refresh the page!!!
             event.preventDefault();
-
-            // Get value from form element
-            var email = event.target.email.value; //note: you could combine this with the next line but this makes it easier to debug
-            var name = event.target.name.value;
 
             // Insert a task into the collection
             Emails.insert({
-                email: email,
-                name: name
+                email: event.target.email.value, //event.target will be the form, when the form is submitted it'll have a property for each field (based on the 'name' attribute)
+                name: event.target.name.value
             });
-
-            // Clear form (not critical since we're hiding)
-            event.target.email.value = "";
-            event.target.name.value = "";
 
             Session.set('sent', true);
 
@@ -56,31 +46,15 @@ if (Meteor.isServer)
     Meteor.startup(function ()
     {
 
-        /**
-         * REMOTES DUPLICATES
-         * Can take off if you'd like (doesn't hurt anything though!)
-         * Note: a better way to do this would be to prevent the user from submitting form if it's a duplicate
-         * a good tool would be aldeed-simpleschema or autoform
-         *
-         * @type {Array}
-         */
-
-        var exists = []; //keep track of which emails we've already found
+        //often times you'll want to do things here
+        //for now let's just log all the emails to console
 
         var allEmails = Emails.find().fetch(); //remember to use fetch or else it returns a "cursor" meaning a reference to the db but not the actual objects!
 
         //cycle through all emails
         _.each(allEmails, function (item)
         {
-            //check if the email is already in the exists array
-            if (exists.indexOf(item.email) > -1) //index of returns the spot in the array, so can return 0 meaning it's the first item! We should use -1 (meaning it's not in the array)
-            {
-                Emails.remove(item._id);
-
-                console.log('deleted extra email:'+item.email); //this will log to the same terminal you did "meteor" (to run the application)
-            }
-            //add to exists array
-            exists.push(item.email);
+            console.log(item.email); //this will log to the same terminal you did "meteor" (to run the application)
         });
 
     });
