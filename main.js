@@ -1,3 +1,4 @@
+//this is like creating an array of email object (but with lots of added stuff!!)
 Emails = new Mongo.Collection("emails");
 
 //this code is performed inside the browser itself (the client side)
