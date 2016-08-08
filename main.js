@@ -11,8 +11,8 @@ Emails = new Mongo.Collection("emails");
 if (Meteor.isClient) {
 
     //TEMPLATE INTRO
-    //here we'll say what goes into our templates and how our templates will respond to actions
     //templates are peices of html that include variables, if statements, and loops
+    //here we'll say what goes into our templates and how our templates will respond to actions
     //you can have mutliple templates with different names to keep them organized
     
     //helpers say WHAT variables get passed to the template
