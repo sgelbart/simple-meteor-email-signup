@@ -15,8 +15,10 @@ if (Meteor.isClient) {
     //here we'll say what goes into our templates and how our templates will respond to actions
     //you can have mutliple templates with different names to keep them organized
     
+    //TEMPLATE HELPERS
     //helpers say WHAT variables get passed to the template
     //here we're defining helpers for our ADDEMAIL template
+    //Writing variables from within the helpers helps us keep our code organized and modular
     Template.addEmail.helpers(
         {
             //keep track of if the user has sent the form
