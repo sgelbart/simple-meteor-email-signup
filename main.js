@@ -30,7 +30,7 @@ if (Meteor.isClient) {
         }
     );
 
-    //events say WHEN to take certain actions based on how the user interacts with the template
+    //events say WHEN to execute code (based on how the user interacts with the template)
     Template.addEmail.events(
     {
         //this will be called when you submit form with class 'add-email'
