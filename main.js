@@ -53,21 +53,20 @@ if (Meteor.isClient) {
         }
     });
 
-    //say what variables will get passed to the 
-    //wondering why we don't define what "emails" are once and use it throughout our code?
-    //it's beacuse when you have a large application, you could have lots of different lists of emails used in different places, which would make things confusing
+    //say what variables will get passed to the emailList template
+    //we'll redefine our emails variable here for this template
     Template.emailList.helpers(
         {
             emails: function()
             {
-                return Emails.find(); //question: why can we use find() here without fetch?? probably because it's client? or maybe because the template automatically pulls it as well?
+                return Emails.find();
             }
         }
     );
 }
 
 //this code is performed behind the scenes before we send any data to the browser
-//code we want to be secure or to happen for multiple users should go here.
+//code we want to be secure should go here.
 if (Meteor.isServer)
 {
     //this code only runs when meteor is first starting 
