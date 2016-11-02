@@ -25,6 +25,8 @@ if (Meteor.isClient) {
             //(so we know when we can hide it)
             sent: function ()
             {
+                //SESSION keeps track of variables we want to save for the CURRENT BROWSER SESSION
+                //e.g., when you clear your cookies or open a different browser "sent" won't be remembered
                 return Session.get('sent');
             }
         }
