@@ -61,6 +61,7 @@ if (Meteor.isClient) {
         {
             emails: function()
             {
+                //here we can also do thinks like sort the list or filter out certain ones etc.
                 return Emails.find();
             }
         }
