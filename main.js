@@ -4,10 +4,10 @@
 //think of it like:
 //[{name:'Sabrina',email:'sabrina@domain.com'},{name:'Brit',email:'brit@domain.com'}]
 //it we be saved to the server so that it's shared between mutliple users (so everyone sees the same list)
-//and it will also be accessible on the client side (yes, sometimes you'll have stuff that's only on the server or client) 
+//and it will also be accessible in the browser (aka client).
 Emails = new Mongo.Collection("emails");
 
-//this code is only performed inside the browser itself (the client side)
+//this code is only performed inside the browser itself (the client side) since we don't need it on the server
 if (Meteor.isClient) {
 
     //TEMPLATE INTRO
